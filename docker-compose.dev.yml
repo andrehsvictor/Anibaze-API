@@ -1,0 +1,27 @@
+services:
+  postgres:
+    container_name: anibaze-postgres
+    image: postgres
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_DB=${POSTGRES_DB:-anibaze}
+    ports:
+      - ${POSTGRES_PORT:-5432}:5432
+    networks:
+      - anibaze-network
+    env_file:
+      - .env
+  redis:
+    image: redis
+    container_name: anibaze-redis
+    ports:
+      - ${REDIS_PORT:-6379}:6379
+    networks:
+      - anibaze-network
+    env_file:
+      - .env
+networks:
+  anibaze-network:
+    driver: bridge
+    name: anibaze-network
