@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import andrehsvictor.anibaze.dto.error.FieldErrorDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,6 +28,12 @@ public class Payload<T, E> {
     public static Payload<?, String> error(String message) {
         Payload<?, String> payload = new Payload<>();
         payload.getErrors().add(message);
+        return payload;
+    }
+
+    public static <T> Payload<?, FieldErrorDto> error(FieldErrorDto fieldError) {
+        Payload<?, FieldErrorDto> payload = new Payload<>();
+        payload.getErrors().add(fieldError);
         return payload;
     }
 
